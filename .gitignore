@@ -1,0 +1,11 @@
+# LUMEN
+/vendor
+/.idea
+Homestead.json
+Homestead.yaml
+.env
+.phpunit.result.cache
+
+# EDITOR
+.phpintel
+composer.lock
