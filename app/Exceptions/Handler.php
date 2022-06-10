@@ -9,6 +9,7 @@ use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use App\Helpers\ResponseHelper;
+use Firebase\JWT\SignatureInvalidException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -62,6 +63,8 @@ class Handler extends ExceptionHandler
             return ResponseHelper::setErrorResponse('Error Validation');
         } elseif ($exception instanceof MethodNotAllowedHttpException) {
             return ResponseHelper::setErrorResponse('Error Method Not Allowed');
+        }  elseif ($exception instanceof SignatureInvalidException) {
+            return ResponseHelper::setErrorResponse('Signature verification failed');
         }
 
         return parent::render($request, $exception);

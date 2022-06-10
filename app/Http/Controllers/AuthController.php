@@ -147,4 +147,35 @@ class AuthController extends Controller
 
     }
 
+    /**
+     * Claims token is valid.
+     *
+     * @param 
+     * - string  $token  : Token has been given in verify process
+     *
+     * @return object json 
+     */
+    public function claims(Request $request){
+
+        // Get all request params
+        $params = $request->all();
+
+        // Validate params
+        if (empty($params['token'])) {
+            return ResponseHelper::setErrorResponse('Invalid parameter');
+        }
+
+        $result = array();
+
+        try {
+            // Validate token
+            $decodeToken = JWT::decode($params['token'], env('JWT_KEY'), array('HS256'));
+        } catch (Exception $e) {
+             return ResponseHelper::setErrorResponse($e->getMessage());
+        }
+
+        return ResponseHelper::setResponse('Token valid', null);
+
+    }
+
 }

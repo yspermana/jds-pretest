@@ -15,6 +15,7 @@ $router->get('/', function () use ($router) { return 'API'; });
 
 $router->post('auth/register',      'AuthController@register');
 $router->post('auth/verify',      	'AuthController@verify');
+$router->post('auth/claims',      	'AuthController@claims');
 
 
 
